@@ -1,0 +1,87 @@
+<div class="center">
+    <form #info="ngForm">
+      {{info.value|json}}
+      <mat-card>
+        <mat-card-header>
+ 
+          <mat-card-title>Registration</mat-card-title>
+          <mat-card-subtitle>Naw Account</mat-card-subtitle>
+        </mat-card-header>
+ 
+ 
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="name" name="fName" [(ngModel)]="rgData.fName">
+          </mat-form-field>
+          <br><br>
+ 
+          <mat-form-field class="example-full-width">
+            <mat-label>last Name</mat-label>
+            <input matInput placeholder="last name" name="lName" [(ngModel)]="rgData.lName">
+          </mat-form-field>
+          <br><br>
+ 
+          <mat-form-field class="example-full-width">
+            <mat-label>New Password</mat-label>
+            <input matInput placeholder="new password" name="pass" [(ngModel)]="rgData.pass">
+          </mat-form-field>
+          <br><br>
+ 
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput placeholder="re-enter password" name="cPass" [(ngModel)]="rgData.cPass">
+          </mat-form-field>
+          <br><br>
+ 
+          <mat-form-field class="example-full-width">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" name="dob" [(ngModel)]="rgData.dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-label>Age</mat-label>
+            <input matInput placeholder="age" value="" name="age" [(ngModel)]="rgData.age">
+          </mat-form-field>
+          <br><br>
+ 
+          <mat-form-field class="example-full-width">
+            <mat-label>Address</mat-label>
+            <textarea matInput placeholder="fullAddress" name="address" [(ngModel)]="rgData.address"></textarea>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <select matNativeControl required name="country" [(ngModel)]="rgData.country">
+              <option value="USA">USA</option>
+              <option value="UK">UK</option>
+              <option value="INDIA">India</option>
+              <option value="Japan">Japan</option>
+            </select>
+          </mat-form-field><br>
+          <mat-label>Gender </mat-label>
+ 
+          <mat-radio-group aria-label="Select an option" name="gender" [(ngModel)]="rgData.gender">
+            <mat-radio-button value="Male">Male </mat-radio-button>
+            <mat-radio-button value="female">female</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-label>Hobbies :</mat-label><br>
+          <mat-checkbox value="Playing" name="Hobbies" [(ngModel)]="rgData.hobbies">Playing</mat-checkbox><br>
+          <mat-checkbox value="Reading" name="Hobbies" [(ngModel)]="rgData.hobbies">Reading</mat-checkbox><br>
+          <mat-checkbox value="Chatting" name="Hobbies" [(ngModel)]="rgData.hobbies">Chatting</mat-checkbox><br>
+          <mat-checkbox value="Sleeping" name="Hobbies" [(ngModel)]="rgData.hobbies">Sleeping</mat-checkbox><br>
+          <mat-checkbox value="Working" name="Hobbies" [(ngModel)]="rgData.hobbies">Working</mat-checkbox><br>
+        </mat-card-content>
+ 
+        <button mat-button (click)="onSubmit()">Submit</button>
+        <button mat-button>Cancel</button>
+ 
+      </mat-card>
+    </form>
+  </div>
+ 
+  <router-outlet></router-outlet>
+ 

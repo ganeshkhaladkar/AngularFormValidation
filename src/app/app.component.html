@@ -1,21 +1,125 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
+  <div class="center">
+    <form #info="ngForm">
+     
+      <div class="form-group"[class.has-error]="frtName.invalid && frtName.touched"
+         [class.has-success]="frtName.valid" >
+        <label for="fName">First Name:</label>
+        <input required pattern ="/^[a-zA-Z]+ [a-zA-Z]+$/" type="text" class="form-control" id="fName" name="firstName" 
+        [(ngModel)]="rgData.fName" #frtName="ngModel">
+          
+        <span class="help-block" *ngIf="frtName.invalid && frtName.touched">
+            First Name is required
+          </span>
+          <span class="help-block" *ngIf="frtName.pattern && frtName.touched">
+            First Name is invalid
+          </span>
+      </div>
+      
+      <div class="form-group" [class.has-error]="lstName.invalid && lstName.touched"
+        [class.has-success]="lstName.valid">
+        <label for="pwd">Last Name</label>
+        <input required type="text" class="form-control" id="lName" name="lastName" 
+          [(ngModel)]="rgData.lName" #lstName="ngModel">
 
-<router-outlet></router-outlet>
+          <span class="help-block" *ngIf="lstName.invalid && lstName.touched">
+            Last Name is required
+          </span>
+      </div>
+     
+      <div class="form-group"[class.has-error]="newPassword.touched && newPassword.invalid">
+        <label for="pwd">New Password:</label>
+        <input required type="password" class="form-control" id="pwd" name="nPassword"
+        [(ngModel)]="rgData.password" #newPassword="ngModel">
+        <span class="help-block" *ngIf="newPassword.touched && newPassword.errors?.required">
+          Password is required
+        </span>
+      </div>
+     
+      <div class="form-group" [class.has-error]="cmfPassword.touched && cmfPassword.invalid">
+        <label for="pwd" class="control-label">Confirm Password:</label>
+        <input appConfirmEqualValidator = "nPassword" required  type="password" class="form-control" id="C_pwd" name="C_password" 
+        [(ngModel)]="rgData.c_password" #cmfPassword="ngModel">
+
+        <span class="help-block" *ngIf="cmfPassword.touched && cmfPassword.errors?.required">
+         Confirm Password is required
+        </span>
+        <span class="help-block" *ngIf="rgData.password !== rgData.c_password">
+          Password and Confirm Password not Match
+         </span>
+         
+      </div>
+     
+      <mat-form-field class="example-full-width">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate" name="dob" [(ngModel)]="rgData.DOB">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field><br>
+
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="text" class="form-control" id="age" name="Age" [(ngModel)]="rgData.age">
+      </div>
+
+      <div class="form-group" [class.has-error]="country.touched && country.invalid">
+        <label for="Address">Address:</label>
+        <textarea class="form-control" rows="5" id="add" name="Address" [(ngModel)]="rgData.Address"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="sel1">Country:</label>
+        <select required class="form-control" id="sel1" name="Country" 
+        [(ngModel)]="rgData.country" #country="ngModel">
+          <option>India</option>
+          <option>USA</option>
+          <option>UK</option>
+          <option>Japan</option>
+        </select>
+            
+            <span class="help-block" *ngIf="country.touched && country.invalid">
+              Country Name is required
+            </span>
+            <br>
+      </div>
+      <div class="form-group"[class.has-error]="gender.touched && gender.invalid">
+      <div class="form-check">
+        <label>Gender</label><br>
+        <label class="form-check-label" for="radio1">
+          <input required type="radio" class="form-check-input" id="meal" name="Male" value="Male" 
+          [(ngModel)]="rgData.gender" #gender="ngModel">Male
+        </label>
+      </div>
+     
+      <div class="form-check">
+        <label class="form-check-label" for="radio2">
+          <input required type="radio" class="form-check-input" id="female" name="Female" value="Female" 
+          [(ngModel)]="rgData.gender" #gender="ngModel">Female
+        </label>
+      </div>
+      <span class="help-block" *ngIf="gender.touched && gender.invalid">
+        Gender is required
+      </span>
+    </div>
+      <br>
+      <br>
+      
+        
+      <div class="form-group">
+        <label for="fName">Hobbies:</label>
+        <input type="text" class="form-control" id="hobbies" name="Hobbies" [(ngModel)]="rgData.Hobbies">
+      </div>
+              <br>
+     
+              <div class="form-check-inline">
+        <label class="form-check-label" for="check1">
+          <input type="checkbox" class="form-check-input" id="done" name="Done" value="Playing" [(ngModel)]="Done">Do you Agree
+        </label>
+      </div>
+      
+      <br><br><br>
+      <button type="submit" class="btn btn-primary"(click)="onSubmit()" [disabled]="info.invalid">Submit</button>
+
+    </form>
+  </div>
+</div>
